@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_TEXT, body);
-        intent.putExtra(Intent.EXTRA_SUBJECT, "JustJava order for " + name);
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.order_summary_email_subject, name));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -92,12 +92,12 @@ public class MainActivity extends AppCompatActivity {
      * @return the summary of the order
      */
     private String createOrderSummary(int price, String name, boolean cream, boolean chocolate){
-        String priceMessage = "Name: " + name;
-        priceMessage += "\nAdd whipped cream? " + cream;
-        priceMessage += "\nAdd chocolate? " + chocolate;
-        priceMessage += "\nQuantity: " + quantity;
-        priceMessage += "\nTotal: $" + price;
-        priceMessage += "\nThank you!";
+        String priceMessage = getString(R.string.order_summary_name, name);
+        priceMessage += "\n" + getString(R.string.order_summary_whipped_cream, cream);
+        priceMessage += "\n" + getString(R.string.order_summary_chocolate, chocolate);
+        priceMessage += "\n" + getString(R.string.order_summary_quantity, quantity);
+        priceMessage += "\n" + getString(R.string.order_summary_price, price);
+        priceMessage += "\n" + getString(R.string.thank_you);
         return priceMessage;
     }
 
